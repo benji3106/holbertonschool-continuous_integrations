@@ -39,5 +39,16 @@ Layer caching is enabled using GitHub Actions cache (`type=gha`), configured via
 
 **After caching (warm cache):** [Run #9](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33057415824) — build job: 33s, 36% cached
 
+### 4. Vulnerability scanning before publish
+Before an image is pushed to the registry, it is built locally (not pushed) and scanned with [Trivy](https://github.com/aquasecurity/trivy). The scan targets OS packages and language-specific libraries (`vuln-type: os,library`).
+
+**Policy:** any `CRITICAL` severity finding fails the workflow and blocks the publish step. The image is only pushed if the scan passes.
+
+**Known exception:** [CVE-2026-59873](https://github.com/isaacs/node-tar/security/advisories/GHSA-23hp-3jrh-7fpw) (a DoS vulnerability in `tar`) is explicitly ignored via `.trivyignore`. This `tar` copy is bundled inside `npm` itself (part of the `node:20-alpine` base image), not a dependency of this application (confirmed with `npm ls tar`). The application never extracts untrusted tar/gzip archives, so the vulnerability is not exploitable here. The fix depends on an upstream Node.js release shipping a patched `npm` bundle (tracked in [npm/cli#9801](https://github.com/npm/cli/issues/9801)) and will be revisited once available.
+
+**Example run (scan blocking a critical finding):** [Run #13](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33075952361)
+
+**Example run (scan passing with exception applied):** [Run #15](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33077697883)
+
 ## Application
 The application (`Dockerfile`, `package.json`, `server.js`) is reused from a previous project (`docker_optimization`: hardened Node.js image with non-root user and healthcheck).
