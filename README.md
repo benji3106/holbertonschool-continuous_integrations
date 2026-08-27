@@ -35,9 +35,9 @@ Tags are generated automatically from the Git context using `docker/metadata-act
 ### 3. Layer caching in CI
 Layer caching is enabled using GitHub Actions cache (`type=gha`), configured via `cache-from`/`cache-to` on the build step. Unchanged layers (dependencies, base image setup) are reused between runs instead of being rebuilt from scratch.
 
-**Before caching (cold cache):** [Run #8](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33057301136) — build job: 44s, 0% cached
+**Before caching (cold cache):** [Run #8](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33057301136) : build job: 44s, 0% cached
 
-**After caching (warm cache):** [Run #9](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33057415824) — build job: 33s, 36% cached
+**After caching (warm cache):** [Run #9](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33057415824) : build job: 33s, 36% cached
 
 ### 4. Vulnerability scanning before publish
 Before an image is pushed to the registry, it is built locally (not pushed) and scanned with [Trivy](https://github.com/aquasecurity/trivy). The scan targets OS packages and language-specific libraries (`vuln-type: os,library`).
