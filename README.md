@@ -32,5 +32,12 @@ Tags are generated automatically from the Git context using `docker/metadata-act
 
 **Example release image:** [ghcr.io/benji3106/holbertonschool-continuous_integrations:1.0.0](https://github.com/benji3106/holbertonschool-continuous_integrations/pkgs/container/holbertonschool-continuous_integrations)
 
+### 3. Layer caching in CI
+Layer caching is enabled using GitHub Actions cache (`type=gha`), configured via `cache-from`/`cache-to` on the build step. Unchanged layers (dependencies, base image setup) are reused between runs instead of being rebuilt from scratch.
+
+**Before caching (cold cache):** [Run #8](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33057301136) — build job: 44s, 0% cached
+
+**After caching (warm cache):** [Run #9](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33057415824) — build job: 33s, 36% cached
+
 ## Application
 The application (`Dockerfile`, `package.json`, `server.js`) is reused from a previous project (`docker_optimization`: hardened Node.js image with non-root user and healthcheck).
