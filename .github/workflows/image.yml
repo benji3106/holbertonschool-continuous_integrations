@@ -57,6 +57,7 @@ jobs:
           severity: CRITICAL
           exit-code: '1'
           vuln-type: os,library
+          trivyignores: .trivyignore
 
       - name: Push image
         if: success()

@@ -1,0 +1,8 @@
+# CVE-2026-59873 - tar DoS via crafted gzip bomb
+# Bundled inside npm itself (comes with the node:20-alpine base image), not a direct app dependency.
+# Confirmed with `npm ls tar` -> not used by this application.
+# Not exploitable here: this app never extracts untrusted tar/gzip archives.
+# Fix depends on upstream Node.js shipping an npm release with tar >= 7.5.19.
+# Tracked upstream: https://github.com/npm/cli/issues/9801
+# Revisit when Node.js ships a patched npm bundle.
+CVE-2026-59873
