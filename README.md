@@ -12,5 +12,14 @@ On every push to `main`, a GitHub Actions workflow (`.github/workflows/image.yml
 
 **Example successful run:** [View run](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33051992693)
 
+### 1. Publish to a registry
+On every push to `main`, the workflow authenticates to GitHub Container Registry (GHCR) using the auto-generated `GITHUB_TOKEN` (no hardcoded credentials), then builds and pushes the image. Each push is tagged with both `latest` and the short commit SHA (`sha-<short_sha>`), so any published image can be traced back to the exact commit that produced it.
+
+**Published image:** [ghcr.io/benji3106/holbertonschool-continuous_integrations](https://github.com/benji3106/holbertonschool-continuous_integrations/pkgs/container/holbertonschool-continuous_integrations)
+
+```bash
+docker pull ghcr.io/benji3106/holbertonschool-continuous_integrations:latest
+```
+
 ## Application
-The application (`Dockerfile`, `package.json`, `server.js`) is reused from a previous project (`docker_optimization` : hardened Node.js image with non-root user and healthcheck).
+The application (`Dockerfile`, `package.json`, `server.js`) is reused from a previous project (`docker_optimization`: hardened Node.js image with non-root user and healthcheck).
