@@ -23,10 +23,10 @@ docker pull ghcr.io/benji3106/holbertonschool-continuous_integrations:latest
 
 ### 2. Meaningful tagging strategy
 Tags are generated automatically from the Git context using `docker/metadata-action`:
-- `latest` — always points to the most recent build on the default branch (`main`)
-- `main` (or the branch name) — tracks the branch an image was built from
-- `sha-<short_sha>` — traces an image back to the exact commit that produced it
-- `<version>` (e.g. `1.0.0`) — generated only when a semver Git tag (`vX.Y.Z`) is pushed, marking an official release
+- `latest` : always points to the most recent build on the default branch (`main`)
+- `main` (or the branch name) : tracks the branch an image was built from
+- `sha-<short_sha>` : traces an image back to the exact commit that produced it
+- `<version>` (e.g. `1.0.0`) : generated only when a semver Git tag (`vX.Y.Z`) is pushed, marking an official release
 
 **Example release run:** [View run](https://github.com/benji3106/holbertonschool-continuous_integrations/actions/runs/33056173356)
 
